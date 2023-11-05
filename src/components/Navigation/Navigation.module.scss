@@ -8,5 +8,9 @@
 }
 
 .navLink.activeNavLink {
-  color: #061de6;
+  color: #ffffff;
+  &:hover,
+  &:focus {
+    color: rgba(255, 255, 255, 0.848);
+  }
 }

@@ -44,7 +44,6 @@ export default function FormEditColor({ name, number, id }) {
       const pattern = /^\d{5}$/;
       console.log(pattern.test(number));
       if (!pattern.test(number)) {
-        console.log('asdasd');
         setMessage('Please enter 5 number!');
         return;
       }
@@ -65,7 +64,7 @@ export default function FormEditColor({ name, number, id }) {
 
   return (
     <div className={s.container}>
-      <div>
+      <div className={s.adminEditForm}>
         <Input
           label="Color name"
           type="text"

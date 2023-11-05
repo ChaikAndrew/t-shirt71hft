@@ -1,6 +1,6 @@
 import { React } from 'react';
 import LoginForm from '../../components/LoginForm';
-import Background from '../../images/wallpaperflare.com_wallpaper.jpg';
+import Background from '../../images/photo-1523381210434-271e8be1f52b.avif';
 import s from './LoginPage.module.scss';
 
 const LoginPage = () => {
