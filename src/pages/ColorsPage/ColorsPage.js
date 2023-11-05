@@ -12,6 +12,8 @@ import { colorsParse } from '../../redux/colors/colors-operations';
 import { getFilter, getColors } from '../../redux/colors/colors-selectors';
 import { useDispatch, useSelector } from 'react-redux';
 import Logo from '../../images/hft.svg';
+import s from './ColorPage.module.scss';
+import BackgroungImage from '../../images/photo-1523381210434-271e8be1f52b.avif';
 
 export default function AdminPage() {
   const colors = useSelector(getColors);
@@ -31,7 +33,12 @@ export default function AdminPage() {
   };
 
   return (
-    <>
+    <div
+      className={s.HomePage}
+      style={{
+        backgroundImage: `linear-gradient(0.51turn, #1d12127c, #3d00191c), url(${BackgroungImage})`,
+      }}
+    >
       <Section
         title="Add new color"
         image={Logo}
@@ -69,6 +76,6 @@ export default function AdminPage() {
           <ColorsList colors={colors} />
         )}
       </Section>
-    </>
+    </div>
   );
 }

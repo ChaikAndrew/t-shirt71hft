@@ -87,7 +87,7 @@ export default function FormEditColor({ name, number, id }) {
           />
           {message && <span>{message}</span>}
         </div>
-        <div>
+        <div className={s.formButtonContainer}>
           {isEditMode ? (
             <>
               <Button
