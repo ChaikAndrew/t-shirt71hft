@@ -104,6 +104,7 @@ export default function FormEditColor({ name, number, id }) {
           ) : (
             <>
               <Button
+                className
                 text={'Edit'}
                 listener={() => setIsEditMode(true)}
                 color="red"

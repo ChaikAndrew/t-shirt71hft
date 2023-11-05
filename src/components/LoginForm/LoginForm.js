@@ -84,7 +84,7 @@ export default function LoginForm() {
       >
         <Notification text={message === '' ? error : message} color="red" />
       </CSSTransition>
-      <form onSubmit={handleSubmit} className={s.form}>
+      <form onSubmit={handleSubmit} className={`${s.form} ${s.loginForm}`}>
         <Input
           label="Username"
           type="text"

@@ -16,7 +16,7 @@ export default function Section({ title, children, appear, styles, image }) {
         unmountOnExit
       >
         <div className={s.titleContainer}>
-          {image && <img src={image} width="50" height="50" alt="logo" />}
+          {image && <img src={image} width="30" height="30" alt="logo" />}
         </div>
       </CSSTransition>
       {title && <h2 className={classNames(style.join(' '))}>{title}</h2>}
