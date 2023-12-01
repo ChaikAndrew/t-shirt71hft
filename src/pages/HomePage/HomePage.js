@@ -34,7 +34,7 @@ const customStyles = {
 const HomePage = () => {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [selectedSize, setSelectedSize] = useState(null);
-  console.log('HomePage  selectedSize:', selectedSize);
+  const [searchValue, setSearchValue] = useState('');
   const [searchType, setSearchType] = useState('name');
   const [searchedColors, setSearchedColors] = useState([]);
 
@@ -49,6 +49,7 @@ const HomePage = () => {
   }, [dispatch]);
 
   const handleSearchQuery = e => {
+    setSearchValue(e.target.value);
     const query = e.target.value.trim().toLowerCase();
 
     if (query === '') {
@@ -59,14 +60,15 @@ const HomePage = () => {
     const search = colors.filter(color => {
       return (
         (searchType === 'name' && color.name.toLowerCase().includes(query)) ||
-        (searchType === 'number' &&
-          color.number.toLowerCase().startsWith(query))
+        (searchType === 'number' && color.number.toLowerCase().includes(query))
       );
     });
     setSearchedColors(search);
   };
 
   const handleSearchType = e => {
+    setSearchValue('');
+    setSearchedColors([]);
     setSearchType(e.target.value);
   };
 
@@ -78,8 +80,6 @@ const HomePage = () => {
   function closeModal() {
     setIsOpen(false);
   }
-
-  console.log(sizes[selectedSize]);
 
   return (
     <div
@@ -109,10 +109,11 @@ const HomePage = () => {
             id="searchType"
             onChange={handleSearchType}
           >
-            <option value="color">By name</option>
+            <option value="name">By name</option>
             <option value="number">By number</option>
           </select>
           <input
+            value={searchValue}
             onChange={handleSearchQuery}
             type="text"
             className={s.searchValue}
@@ -176,20 +177,24 @@ const HomePage = () => {
         contentLabel="Example Modal"
       >
         <table>
-          <tr className={s.tableHead}>
-            <th className={s.tableTitle}>Size (Marking)</th>
-            <th className={s.tableTitle}>Number</th>
-          </tr>
-          {selectedSize &&
-            sizes[selectedSize]?.length !== 0 &&
-            sizes[selectedSize].map(({ name, number }) => {
-              return (
-                <tr className={s.tableItem}>
-                  <td>{name}</td>
-                  <td>{number}</td>
-                </tr>
-              );
-            })}
+          <tbody>
+            <tr className={s.tableHead}>
+              <th className={s.tableTitle}>Size (Marking)</th>
+              <th className={s.tableTitle}>Number</th>
+            </tr>
+            {selectedSize &&
+              sizes[selectedSize]?.length !== 0 &&
+              [...sizes[selectedSize]]
+                .sort((a, b) => a.sortId - b.sortId)
+                .map(({ name, number }) => {
+                  return (
+                    <tr key={name} className={s.tableItem}>
+                      <td>{name}</td>
+                      <td>{number}</td>
+                    </tr>
+                  );
+                })}
+          </tbody>
         </table>
         <button className={s.closeModal} onClick={closeModal}>
           Close
